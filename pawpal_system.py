@@ -21,9 +21,11 @@ class Task:
     start_time: Optional[str] = None  # assigned by Scheduler, e.g. "09:00"
 
     def is_high_priority(self) -> bool:
+        """Return True if this task's priority is HIGH."""
         return self.priority == Priority.HIGH
 
     def mark_complete(self) -> None:
+        """Mark this task as completed."""
         self.completed = True
 
     def reset(self) -> None:
@@ -41,9 +43,11 @@ class Pet:
     tasks: List[Task] = field(default_factory=list)
 
     def add_task(self, task: Task) -> None:
+        """Add a task to this pet's task list."""
         self.tasks.append(task)
 
     def remove_task(self, task: Task) -> None:
+        """Remove a task from this pet's task list."""
         self.tasks.remove(task)
 
     def get_required_tasks(self) -> List[Task]:
@@ -71,9 +75,11 @@ class Owner:
     preferred_categories: List[str] = field(default_factory=list)
 
     def add_pet(self, pet: Pet) -> None:
+        """Add a pet to this owner's pet list."""
         self.pets.append(pet)
 
     def remove_pet(self, pet: Pet) -> None:
+        """Remove a pet from this owner's pet list."""
         self.pets.remove(pet)
 
     def get_all_tasks(self) -> List[Task]:
@@ -84,6 +90,7 @@ class Owner:
         return all_tasks
 
     def get_constraints(self) -> dict:
+        """Return a dict of scheduling constraints for this owner."""
         return {
             "available_minutes": self.available_minutes,
             "preferred_start_time": self.preferred_start_time,
@@ -104,12 +111,15 @@ class Schedule:
         return sum(t.duration_minutes for t in self.scheduled_tasks)
 
     def add_task(self, task: Task) -> None:
+        """Append a task to the scheduled task list."""
         self.scheduled_tasks.append(task)
 
     def remove_task(self, task: Task) -> None:
+        """Remove a task from the scheduled task list."""
         self.scheduled_tasks.remove(task)
 
     def display(self) -> str:
+        """Return a formatted string of the full schedule with times and status."""
         lines = [f"Schedule for {self.owner.name} — {self.date}", "-" * 44]
         for i, task in enumerate(self.scheduled_tasks, 1):
             status = "✓" if task.completed else "○"
@@ -130,6 +140,7 @@ class Scheduler:
     """
 
     def __init__(self, owner: Owner):
+        """Initialise the Scheduler with the owner whose pets will be planned for."""
         self.owner = owner
 
     # ------------------------------------------------------------------

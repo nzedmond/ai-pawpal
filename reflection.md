@@ -6,12 +6,18 @@
 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
-
+I chose 5 classes. 
+1. Owner-> represents the pet owner and their constraints
+2. Pet: represents the pet being cared for
+3. Task: represents a single care task
+4. Schedule: represents the generated daily plan
+5. Scheduler: contains the logic for building a schedule given constraints
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
-
+1. Pet had no tasks attribute, which disconnected Tasks from pet, so I added a List[Task] attribute to pet.
+2. Using string for priorities was prone to bugs so I used Enum instead. 
 ---
 
 ## 2. Scheduling Logic and Tradeoffs

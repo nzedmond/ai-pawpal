@@ -19,7 +19,7 @@ def main():
     # ------------------------------------------------------------------ #
     mochi = Pet(name="Mochi", species="dog", age=3)
     luna = Pet(name="Luna", species="cat", age=5)
-
+    bambi = Pet(name="Bambi", species="dog", age=10)
     # ------------------------------------------------------------------ #
     # 3. Add Tasks                                                         #
     # ------------------------------------------------------------------ #
@@ -54,10 +54,20 @@ def main():
         priority=Priority.MEDIUM,
         category="enrichment",
         frequency="daily",
-    ))
+    )) 
 
+    # tasks for bambi
+    bambi.add_task(Task(
+        title="Shaving fur",
+        duration_minutes=30,
+        priority=Priority.HIGH,
+        category="shaving",
+        frequency="weekly"
+    ))
     jordan.add_pet(mochi)
     jordan.add_pet(luna)
+    jordan.add_pet(bambi)
+    
 
     # ------------------------------------------------------------------ #
     # 4. Generate and print Today's Schedule                               #
